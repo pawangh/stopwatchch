@@ -1,6 +1,6 @@
 import tkinter
 import time
-
+import tkinter.messagebox
 screen= tkinter.Tk()
 screen.geometry("400x400")
 screen.title("67 clock")
@@ -16,14 +16,20 @@ def stopwatch():
     ts=hg*60*60+mg*60+sg
     while ts>0:
       ts-=1
+      mi=ts%3600
       print(ts)
+      hours.set(ts//3600)
+      minutes.set(mi//60)
+      seconds.set(ts%60)
+      screen.update()
       time.sleep(1)
+      if ts<=0:
+        tkinter.messagebox.showinfo("67 clock","times up")
 se= tkinter.Entry(screen,textvariable=seconds) 
 m= tkinter.Entry(screen,textvariable=minutes) 
 h= tkinter.Entry(screen,textvariable=hours) 
 st= tkinter.Button(screen,text = "go",command=stopwatch) 
 hla=tkinter.Label(screen,text="hours")
-
 mla=tkinter.Label(screen,text="minutes")
 sela=tkinter.Label(screen,text="seconds")
 
